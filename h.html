@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Valentines</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #ffe4f1, #ffd1e6, #ffc0db);
+    }
+
+    .heart-bg::before {
+      content: "💗 💖 💘 💝 💞";
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      font-size: 6rem;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="relative w-[900px] max-w-full px-10">
+
+    <!-- BIG HEADER -->
+    <h1 class="text-center text-6xl font-extrabold text-pink-600 drop-shadow mb-12">
+      💝 Happy Valentine’s 💝
+    </h1>
+
+    <!-- CARD -->
+    <div
+      id="card"
+      class="heart-bg relative bg-white/90 backdrop-blur shadow-2xl rounded-[2.5rem] p-14 text-center"
+    >
+      <h2 class="text-4xl font-bold mb-4">Will you be my Valentine?</h2>
+      <p class="text-gray-500 text-lg">Choose wisely 😏</p>
+
+      <!-- BUTTON AREA -->
+      <div
+        id="buttons"
+        class="relative mt-14 h-48 flex items-center justify-center"
+      >
+        <button
+          id="yesBtn"
+          class="bg-gradient-to-r from-pink-500 to-rose-500 hover:scale-105 transition transform text-white px-10 py-5 rounded-full text-2xl font-bold shadow-xl"
+        >
+          YES 💖
+        </button>
+
+        <button
+          id="noBtn"
+          class="absolute bg-gray-300 text-gray-700 px-10 py-5 rounded-full text-2xl font-bold shadow-lg"
+          style="left: 520px; top: 70px;"
+        >
+          No 😐
+        </button>
+      </div>
+
+      <!-- RESULT -->
+      <div id="result" class="hidden mt-16">
+        <h3 class="text-5xl font-extrabold text-pink-600 mb-6">
+          I LOVE YOUUUU 😭❤️
+        </h3>
+        <img
+          src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+          class="mx-auto rounded-3xl shadow-xl"
+        />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const buttons = document.getElementById("buttons");
+    const result = document.getElementById("result");
+
+    function moveNoButton() {
+      const containerRect = buttons.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = containerRect.height - btnRect.height;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("mousemove", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      document.getElementById("buttons").classList.add("hidden");
+      result.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
